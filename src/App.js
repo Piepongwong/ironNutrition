@@ -16,7 +16,8 @@ class App extends Component {
     name: "name",
     image: "image",
     calories: "calories",
-    foods: foods
+    foods: foods,
+    foodsOfToday: []
   }
 
   handleChange = (event) => {
@@ -37,6 +38,14 @@ class App extends Component {
     newFoodAttr[keyName] = inputFieldValue
 
     this.setState(newFoodAttr, function() {
+      
+    })
+  }
+
+  addFoodsToday = (foodsObject) => {
+    var currentToday = this.state.foodsOfToday
+    currentToday.push(foodsObject)
+    this.setState({foodsOfToday: currentToday}, function() {
       
     })
   }
@@ -66,17 +75,22 @@ class App extends Component {
         var classNames = "modal"
     }
 
+    var foodiesOfToday = this.state.foodsOfToday.map((food)=> <li>{food.name}</li>)
+
     var foodBoxes = this.state.foods
     .filter((food)=> 
       food.name.toLowerCase().includes(this.state.search.toLowerCase())
     )
     .map((food)=> 
-       <Foodbox name={food.name} cal={food.calories} image={food.image} />
+       <Foodbox addFood={this.addFoodsToday} name={food.name} cal={food.calories} image={food.image} />
     )
 
     return (
       <div className="App">
         <div>
+            <ul>
+              {foodiesOfToday}
+            </ul>
             <button onClick={this.toggleModal} className="button is-primary is-large modal-button" data-target="modal" aria-haspopup="true">Add Food</button>
             <div className={classNames}>
                 <div className="modal-background"></div>

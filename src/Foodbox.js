@@ -2,7 +2,22 @@ import React, {Component} from "react"
 import 'bulma/css/bulma.css';
 
 class Foodbox extends Component {
+
+
     render() {
+        var addFood = ()=> {
+
+            var theFoodObject = {
+                name: this.props.name,
+                image: this.props.image,
+                calories: this.props.cal,
+                quantiy: 0 // note to self, make it possible to update later
+            }
+    
+            this.props.addFood(theFoodObject)
+    
+         }
+
         return (
             <div className="box">
                 <article className="media">
@@ -29,7 +44,7 @@ class Foodbox extends Component {
                         />
                         </div>
                         <div className="control">
-                        <button className="button is-info">
+                        <button onClick={addFood} className="button is-info">
                             +
                         </button>
                         </div>
