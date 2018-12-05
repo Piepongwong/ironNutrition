@@ -3,7 +3,10 @@ import 'bulma/css/bulma.css';
 
 class Foodbox extends Component {
 
-
+    state = {
+        quantity: 0
+    }
+    
     render() {
         var addFood = ()=> {
 
@@ -11,7 +14,7 @@ class Foodbox extends Component {
                 name: this.props.name,
                 image: this.props.image,
                 calories: this.props.cal,
-                quantiy: 0 // note to self, make it possible to update later
+                quantiy: this.state.quantity // note to self, make it possible to update later
             }
     
             this.props.addFood(theFoodObject)
